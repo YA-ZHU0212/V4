@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-
+<html lang="zh-Hant">
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>SMART BRAIN SECURITY TERMINAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART BRAIN SYSTEM</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -22,73 +16,86 @@
     <!-- 背景光 -->
     <div class="background-glow"></div>
 
-    <!-- 主終端 -->
-    <main class="terminal">
+    <!-- 主終端機 -->
+    <div class="terminal">
 
         <!-- Header -->
+        <div class="terminal-header">
 
-        <header class="terminal-header">
+            <div class="header-left">
+                SMART BRAIN
+            </div>
 
-            <div>
+            <div class="header-right">
+                SYSTEM v4.0
+            </div>
 
-                <h1>SMART BRAIN</h1>
+        </div>
 
-                <p>SECURITY TERMINAL</p>
+        <!-- 狀態 -->
+        <div class="status-panel">
+
+            <div class="status-card">
+
+                <span class="status-title">
+                    STATUS
+                </span>
+
+                <span id="statusValue" class="status-value">
+                    INITIALIZING
+                </span>
 
             </div>
 
-            <div class="status-light"></div>
+            <div class="status-card">
 
-        </header>
+                <span class="status-title">
+                    USER ID
+                </span>
 
-        <!-- 狀態資訊 -->
+                <span id="userValue" class="status-value">
+                    ----------
+                </span>
 
-        <section class="status-panel">
-
-            <div>
-                <span>STATUS</span>
-                <strong id="statusText">BOOTING...</strong>
             </div>
 
-            <div>
-                <span>DATABASE</span>
-                <strong id="databaseText">CONNECTING</strong>
+            <div class="status-card">
+
+                <span class="status-title">
+                    DEVICE
+                </span>
+
+                <span id="deviceValue" class="status-value">
+                    OFFLINE
+                </span>
+
             </div>
 
-            <div>
-                <span>USER</span>
-                <strong id="userText">UNKNOWN</strong>
-            </div>
-
-            <div>
-                <span>DRIVER</span>
-                <strong id="driverText">OFFLINE</strong>
-            </div>
-
-        </section>
+        </div>
 
         <!-- 分隔線 -->
 
         <div class="divider"></div>
 
-        <!-- 終端機 -->
+        <!-- 畫面 -->
 
-        <section class="screen">
+        <div id="screen" class="screen">
 
             <pre id="terminalText"></pre>
 
-            <button id="nextButton">
+        </div>
 
-                ACCESS FILE
+        <!-- 按鈕 -->
 
-            </button>
+        <button id="nextButton">
 
-        </section>
+            NEXT
 
-    </main>
+        </button>
+
+    </div>
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
