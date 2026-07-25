@@ -1,1 +1,356 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Orbitron',sans-serif;
+    background:#050505;
+    color:#ffffff;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+
+/* 背景光暈 */
+
+.background-glow{
+
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(255,120,0,.18),
+    transparent 65%);
+
+    animation:glow 5s ease-in-out infinite;
+
+    z-index:0;
+}
+
+/* 主畫面 */
+
+#app{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:28px;
+
+    z-index:2;
+}
+
+/* 卡片 */
+
+.card{
+
+    width:min(92vw,420px);
+
+    min-height:520px;
+
+    border:1px solid rgba(255,120,0,.35);
+
+    border-radius:24px;
+
+    background:rgba(20,20,20,.55);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+
+    0 0 40px rgba(255,120,0,.18),
+
+    inset 0 0 20px rgba(255,120,0,.06);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:40px 30px;
+
+    transition:.6s;
+}
+
+/* 內容 */
+
+#content{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+/* 主標 */
+
+#title{
+
+    font-size:2rem;
+
+    color:#ff7a00;
+
+    letter-spacing:6px;
+
+    margin-bottom:18px;
+
+    text-shadow:
+
+    0 0 12px rgba(255,122,0,.6);
+
+}
+
+/* 副標 */
+
+#subtitle{
+
+    font-size:1rem;
+
+    font-weight:400;
+
+    color:#f4f4f4;
+
+    letter-spacing:4px;
+
+    margin-bottom:35px;
+
+    min-height:28px;
+
+}
+
+/* 內容 */
+
+#body{
+
+    white-space:pre-line;
+
+    line-height:2.1;
+
+    font-size:1rem;
+
+    color:#dddddd;
+
+    min-height:170px;
+
+}
+
+/* NEXT */
+
+#nextBtn{
+
+    width:100%;
+
+    height:52px;
+
+    border-radius:12px;
+
+    border:1px solid #ff7a00;
+
+    background:transparent;
+
+    color:#ff7a00;
+
+    font-size:.95rem;
+
+    letter-spacing:3px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    font-family:'Orbitron',sans-serif;
+
+}
+
+#nextBtn:hover{
+
+    background:#ff7a00;
+
+    color:#000;
+
+    box-shadow:
+
+    0 0 18px rgba(255,122,0,.6);
+
+}
+
+/* 淡入 */
+
+.fade-in{
+
+    animation:fadeIn .7s forwards;
+
+}
+
+/* 淡出 */
+
+.fade-out{
+
+    animation:fadeOut .5s forwards;
+
+}
+
+/* Standing By */
+
+.big{
+
+    font-size:2.5rem!important;
+
+    color:#ff7a00!important;
+
+    text-shadow:
+
+    0 0 20px rgba(255,122,0,.8);
+
+    animation:pulse 1.5s infinite;
+
+}
+
+/* 打字 */
+
+.typing{
+
+    border-right:2px solid #ff7a00;
+
+}
+
+/* 動畫 */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes fadeOut{
+
+to{
+
+opacity:0;
+
+transform:translateY(-15px);
+
+}
+
+}
+
+@keyframes glow{
+
+0%{
+
+transform:scale(1);
+
+opacity:.7;
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:.7;
+
+}
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/* 手機 */
+
+@media(max-width:480px){
+
+.card{
+
+padding:32px 22px;
+
+min-height:470px;
+
+}
+
+#title{
+
+font-size:1.7rem;
+
+}
+
+#subtitle{
+
+font-size:.9rem;
+
+}
+
+#body{
+
+font-size:.95rem;
+
+line-height:1.9;
+
+}
+
+}
