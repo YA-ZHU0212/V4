@@ -88,3 +88,99 @@ window.onload = () => {
     setTimeout(typeLine,600);
 
 };
+// ==============================
+// Authorized User
+// ==============================
+
+nextButton.addEventListener("click", showAuthorizedUser);
+
+function showAuthorizedUser(){
+
+    nextButton.style.display = "none";
+
+    statusText.textContent = "AUTHORIZED";
+
+    databaseText.textContent = "ACCESS GRANTED";
+
+    userText.textContent = "SB-555-0930";
+
+    driverText.textContent = "FAIZ DRIVER";
+
+    terminal.textContent = "";
+
+    output = "";
+
+    lineIndex = 0;
+
+    charIndex = 0;
+
+    const profile = [
+
+        "SMART BRAIN DATABASE",
+        "",
+        "USER AUTHORIZED",
+        "",
+        "NAME : 戴崧原",
+        "NAME(JP) : たい すうげん",
+        "USER ID : SB-555-0930",
+        "",
+        "RANK : LEVEL A",
+        "BELT : FAIZ GEAR",
+        "STATUS : ACTIVE",
+        "",
+        "ACCESS PERMITTED."
+
+    ];
+
+    typeProfile(profile);
+
+}
+function typeProfile(lines){
+
+    let l = 0;
+
+    let c = 0;
+
+    let text = "";
+
+    function typing(){
+
+        if(l >= lines.length){
+
+            terminal.textContent = text;
+
+            nextButton.innerText = "NEXT";
+
+            nextButton.style.display = "block";
+
+            return;
+
+        }
+
+        if(c < lines[l].length){
+
+            text += lines[l][c];
+
+            terminal.textContent = text + "█";
+
+            c++;
+
+            setTimeout(typing,30);
+
+        }else{
+
+            text += "\n";
+
+            l++;
+
+            c = 0;
+
+            setTimeout(typing,180);
+
+        }
+
+    }
+
+    typing();
+
+}
