@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART BRAIN TERMINAL</title>
 
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 掃描線 -->
+    <div class="scanline"></div>
+
+    <!-- 背景發光 -->
+    <div class="background-glow"></div>
+
+    <div class="terminal">
+
+        <div class="terminal-header">
+
+            <div class="header-left">
+                SMART BRAIN TERMINAL
+            </div>
+
+            <div class="header-right">
+                STATUS :
+                <span id="statusText">ONLINE</span>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="status-panel">
+
+            <div>
+                USER :
+                <span id="userName">
+                    SB-555-0930
+                </span>
+            </div>
+
+            <div>
+                DRIVER :
+                <span id="driverStatus">
+                    FAIZ SYSTEM
+                </span>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="screen">
+
+<pre id="terminalText"></pre>
+
+        </div>
+
+        <button id="nextButton">
+            ▶ NEXT
+        </button>
+
+    </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
