@@ -1,7 +1,6 @@
-/* ===========================================
-   SMART BRAIN SECURITY TERMINAL
-   V4
-=========================================== */
+/* ===========================
+   RESET
+=========================== */
 
 *{
     margin:0;
@@ -11,55 +10,62 @@
 
 html,
 body{
-
     width:100%;
     height:100%;
-
-    overflow:hidden;
-
-    background:#050505;
-
-    font-family:
-    "SF Pro Display",
-    "Segoe UI",
-    sans-serif;
-
-    color:white;
-
 }
 
 body{
 
+    background:#020202;
+
+    overflow:hidden;
+
+    font-family:
+    "SF Mono",
+    "Consolas",
+    monospace;
+
+    color:#00ff99;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     position:relative;
 
 }
 
-/* =======================
-   Background
-======================= */
+
+/* ===========================
+   BACKGROUND
+=========================== */
 
 .background-glow{
 
     position:fixed;
 
-    inset:0;
+    width:700px;
+    height:700px;
 
-    background:
-    radial-gradient(circle at center,
-    rgba(255,140,0,.18),
-    transparent 65%);
+    border-radius:50%;
+
+    background:radial-gradient(
+        rgba(255,120,0,.18),
+        transparent 70%
+    );
+
+    filter:blur(60px);
 
     pointer-events:none;
 
 }
 
-/* =======================
-   Scanline
-======================= */
+
+/* ===========================
+   SCANLINE
+=========================== */
 
 .scanline{
 
@@ -70,15 +76,24 @@ body{
     pointer-events:none;
 
     background:
+
     repeating-linear-gradient(
+
         to bottom,
-        rgba(255,255,255,.02) 0px,
-        rgba(255,255,255,.02) 2px,
-        transparent 3px,
-        transparent 6px
+
+        rgba(255,255,255,.03) 0px,
+
+        rgba(255,255,255,.03) 1px,
+
+        transparent 2px,
+
+        transparent 4px
+
     );
 
     animation:scanMove 8s linear infinite;
+
+    opacity:.35;
 
 }
 
@@ -86,51 +101,55 @@ body{
 
     from{
 
-        transform:translateY(-100%);
+        transform:translateY(0);
 
     }
 
     to{
 
-        transform:translateY(100%);
+        transform:translateY(6px);
 
     }
 
 }
 
-/* =======================
-   Terminal
-======================= */
+
+/* ===========================
+   TERMINAL
+=========================== */
 
 .terminal{
 
     width:min(92vw,430px);
 
-    height:min(90vh,850px);
+    height:88vh;
 
-    border:1px solid rgba(255,140,0,.5);
+    border:2px solid #ff7b00;
 
-    border-radius:22px;
+    border-radius:16px;
 
-    background:#0b0b0b;
-
-    overflow:hidden;
+    background:#050505;
 
     box-shadow:
 
-    0 0 35px rgba(255,140,0,.25),
+        0 0 12px rgba(255,120,0,.5),
 
-    inset 0 0 25px rgba(255,140,0,.08);
+        inset 0 0 18px rgba(255,120,0,.08);
 
     display:flex;
 
     flex-direction:column;
 
+    overflow:hidden;
+
+    position:relative;
+
 }
 
-/* =======================
-   Header
-======================= */
+
+/* ===========================
+   HEADER
+=========================== */
 
 .terminal-header{
 
@@ -140,108 +159,102 @@ body{
 
     align-items:center;
 
-    padding:24px;
+    padding:16px 20px;
 
-    border-bottom:1px solid rgba(255,140,0,.25);
+    background:#111;
 
-}
-
-.terminal-header h1{
-
-    color:#ff9800;
-
-    font-size:28px;
-
-    letter-spacing:4px;
+    border-bottom:1px solid #ff7b00;
 
 }
 
-.terminal-header p{
+.header-left{
 
-    margin-top:6px;
+    color:#ff8a00;
 
-    color:#bbbbbb;
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    font-size:14px;
+
+}
+
+.header-right{
+
+    color:#ffaa33;
 
     font-size:12px;
 
-    letter-spacing:3px;
-
 }
 
-.status-light{
-
-    width:14px;
-
-    height:14px;
-
-    border-radius:50%;
-
-    background:#00ff7f;
-
-    box-shadow:
-
-    0 0 15px #00ff7f,
-
-    0 0 30px #00ff7f;
-
-}
-/* =======================
-   Status Panel
-======================= */
+/* ===========================
+   STATUS PANEL
+=========================== */
 
 .status-panel{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(3,1fr);
 
-    gap:16px;
+    gap:10px;
 
-    padding:24px;
+    padding:18px;
 
 }
 
-.status-panel div{
+.status-card{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:10px 12px;
-
-    border:1px solid rgba(255,140,0,.15);
+    border:1px solid rgba(255,123,0,.45);
 
     border-radius:10px;
 
-    background:rgba(255,255,255,.02);
+    background:#0b0b0b;
+
+    padding:12px 8px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:68px;
 
 }
 
-.status-panel span{
+.status-title{
 
-    color:#999;
+    color:#ff8a00;
 
-    font-size:12px;
-
-    letter-spacing:2px;
-
-}
-
-.status-panel strong{
-
-    color:#00ff99;
-
-    font-size:13px;
+    font-size:10px;
 
     letter-spacing:1px;
 
+    margin-bottom:8px;
+
 }
 
-/* =======================
-   Divider
-======================= */
+.status-value{
+
+    color:#00ff99;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    text-shadow:0 0 8px rgba(0,255,153,.55);
+
+}
+
+
+/* ===========================
+   DIVIDER
+=========================== */
 
 .divider{
 
@@ -249,77 +262,84 @@ body{
 
     height:1px;
 
-    background:rgba(255,140,0,.2);
+    background:rgba(255,123,0,.35);
 
 }
 
-/* =======================
-   Screen
-======================= */
+
+/* ===========================
+   SCREEN
+=========================== */
 
 .screen{
 
     flex:1;
 
-    display:flex;
+    overflow-y:auto;
 
-    flex-direction:column;
+    padding:24px 20px;
 
-    padding:24px;
+    position:relative;
 
 }
 
+.screen::-webkit-scrollbar{
+
+    width:4px;
+
+}
+
+.screen::-webkit-scrollbar-thumb{
+
+    background:#ff7b00;
+
+}
+
+
+/* ===========================
+   TERMINAL TEXT
+=========================== */
+
 #terminalText{
-
-    flex:1;
-
-    color:#00ff99;
-
-    font-size:15px;
-
-    line-height:1.8;
 
     white-space:pre-wrap;
 
     word-break:break-word;
 
-    font-family:
+    color:#00ff99;
 
-    Consolas,
+    font-size:15px;
 
-    "Courier New",
+    line-height:1.75;
 
-    monospace;
+    letter-spacing:.8px;
 
-    text-shadow:
-
-    0 0 8px rgba(0,255,153,.35);
+    text-shadow:0 0 8px rgba(0,255,153,.45);
 
 }
 
-/* =======================
-   Cursor
-======================= */
+
+/* ===========================
+   CURSOR
+=========================== */
 
 .cursor{
 
     display:inline-block;
 
-    width:9px;
+    width:10px;
 
-    height:18px;
-
-    margin-left:3px;
-
-    background:#00ff99;
-
-    animation:blink .8s infinite;
-
-    vertical-align:middle;
+    animation:blink .9s infinite;
 
 }
 
 @keyframes blink{
+
+    0%{
+
+        opacity:1;
+
+    }
 
     50%{
 
@@ -327,47 +347,55 @@ body{
 
     }
 
+    100%{
+
+        opacity:1;
+
+    }
+
 }
 
-/* =======================
-   Button
-======================= */
+/* ===========================
+   BUTTON
+=========================== */
 
 #nextButton{
 
-    display:none;
+    margin:18px;
 
-    margin-top:20px;
-
-    padding:16px;
+    height:52px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    background:#ff9800;
+    background:#ff7b00;
 
     color:#111;
 
-    font-size:16px;
+    font-size:15px;
 
-    font-weight:700;
+    font-weight:bold;
 
-    letter-spacing:3px;
+    letter-spacing:2px;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.25s;
+
+    box-shadow:
+        0 0 18px rgba(255,123,0,.45);
 
 }
 
 #nextButton:hover{
 
+    background:#ff9b22;
+
     transform:translateY(-2px);
 
     box-shadow:
-
-    0 0 25px rgba(255,152,0,.55);
+        0 0 28px rgba(255,140,0,.7);
 
 }
 
@@ -376,23 +404,69 @@ body{
     transform:scale(.98);
 
 }
-/* =======================
-   Boot Animation
-======================= */
 
-.terminal{
+#nextButton:disabled{
 
-    animation:terminalBoot 1s ease;
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
 
 }
 
-@keyframes terminalBoot{
+
+/* ===========================
+   EFFECTS
+=========================== */
+
+.glow-orange{
+
+    color:#ff9a00;
+
+    text-shadow:
+        0 0 8px rgba(255,140,0,.8),
+        0 0 16px rgba(255,140,0,.4);
+
+}
+
+.glow-green{
+
+    color:#00ff99;
+
+    text-shadow:
+        0 0 8px rgba(0,255,153,.8),
+        0 0 18px rgba(0,255,153,.45);
+
+}
+
+.warning{
+
+    color:#ff4444;
+
+    text-shadow:
+        0 0 8px rgba(255,60,60,.8);
+
+}
+
+
+/* ===========================
+   FADE
+=========================== */
+
+.fade-in{
+
+    animation:fadeIn .45s ease;
+
+}
+
+@keyframes fadeIn{
 
     from{
 
         opacity:0;
 
-        transform:scale(.96);
+        transform:translateY(8px);
 
     }
 
@@ -400,133 +474,60 @@ body{
 
         opacity:1;
 
-        transform:scale(1);
+        transform:translateY(0);
 
     }
 
 }
 
-/* =======================
-   Status Light
-======================= */
 
-.status-light{
-
-    animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-    0%{
-
-        box-shadow:
-        0 0 8px #00ff7f,
-        0 0 18px #00ff7f;
-
-    }
-
-    50%{
-
-        box-shadow:
-        0 0 18px #00ff7f,
-        0 0 38px #00ff7f;
-
-    }
-
-    100%{
-
-        box-shadow:
-        0 0 8px #00ff7f,
-        0 0 18px #00ff7f;
-
-    }
-
-}
-
-/* =======================
-   CRT Effect
-======================= */
-
-.terminal::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-    linear-gradient(
-        rgba(255,255,255,.03),
-        transparent
-    );
-
-    opacity:.18;
-
-}
-
-/* =======================
-   Scrollbar
-======================= */
-
-::-webkit-scrollbar{
-
-    width:6px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#ff9800;
-
-    border-radius:999px;
-
-}
-
-/* =======================
-   Mobile
-======================= */
+/* ===========================
+   MOBILE
+=========================== */
 
 @media (max-width:480px){
 
     .terminal{
 
-        width:100vw;
+        width:94vw;
 
-        height:100vh;
-
-        border-radius:0;
-
-        border:none;
+        height:92vh;
 
     }
 
-    .terminal-header{
+    .status-panel{
 
-        padding-top:calc(env(safe-area-inset-top) + 18px);
+        gap:8px;
 
-    }
-
-    .screen{
-
-        padding-bottom:calc(env(safe-area-inset-bottom) + 24px);
+        padding:14px;
 
     }
 
-}
+    .status-title{
 
-/* =======================
-   Desktop
-======================= */
+        font-size:9px;
 
-@media (min-width:700px){
+    }
 
-    body{
+    .status-value{
 
-        padding:40px;
+        font-size:11px;
+
+    }
+
+    #terminalText{
+
+        font-size:14px;
+
+        line-height:1.65;
+
+    }
+
+    #nextButton{
+
+        margin:14px;
+
+        height:50px;
 
     }
 
