@@ -184,3 +184,110 @@ function typeProfile(lines){
     typing();
 
 }
+// ==============================
+// Equipment Scan
+// ==============================
+
+nextButton.addEventListener("click", nextStep);
+
+let currentStep = 0;
+
+function nextStep(){
+
+    currentStep++;
+
+    if(currentStep === 1){
+
+        showEquipment();
+
+    }
+
+}
+
+function showEquipment(){
+
+    nextButton.style.display = "none";
+
+    statusText.textContent = "SCANNING";
+
+    databaseText.textContent = "EQUIPMENT";
+
+    driverText.textContent = "VERIFYING";
+
+    const equipment = [
+
+        "SMART BRAIN EQUIPMENT DATABASE",
+        "",
+        "Searching Equipment...",
+        "",
+        "✔ CSM FAIZ GEAR Ver.2",
+        "",
+        "✔ CSM FAIZ AXEL",
+        "",
+        "✔ CSM FAIZ EDGE",
+        "",
+        "Driver Authentication Complete.",
+        "",
+        "Equipment Ready."
+
+    ];
+
+    typeEquipment(equipment);
+
+}
+
+function typeEquipment(lines){
+
+    let line = 0;
+
+    let char = 0;
+
+    let text = "";
+
+    function typing(){
+
+        if(line >= lines.length){
+
+            terminal.textContent = text;
+
+            statusText.textContent = "READY";
+
+            databaseText.textContent = "CONNECTED";
+
+            driverText.textContent = "ONLINE";
+
+            nextButton.innerText = "STANDING BY";
+
+            nextButton.style.display = "block";
+
+            return;
+
+        }
+
+        if(char < lines[line].length){
+
+            text += lines[line][char];
+
+            terminal.textContent = text + "█";
+
+            char++;
+
+            setTimeout(typing,28);
+
+        }else{
+
+            text += "\n";
+
+            line++;
+
+            char = 0;
+
+            setTimeout(typing,180);
+
+        }
+
+    }
+
+    typing();
+
+}
