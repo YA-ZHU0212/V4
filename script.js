@@ -1,293 +1,378 @@
-// ==============================
-// SMART BRAIN TERMINAL V4
-// ==============================
-
-const terminal = document.getElementById("terminalText");
-
+const terminalText = document.getElementById("terminalText");
 const nextButton = document.getElementById("nextButton");
 
-const statusText = document.getElementById("statusText");
-const databaseText = document.getElementById("databaseText");
-const userText = document.getElementById("userText");
-const driverText = document.getElementById("driverText");
+const statusValue = document.getElementById("statusValue");
+const userValue = document.getElementById("userValue");
+const deviceValue = document.getElementById("deviceValue");
 
-const bootLines = [
+let currentScreen = 0;
+let typing = false;
 
-    "SMART BRAIN SECURITY TERMINAL",
-    "",
-    "> Booting System...",
-    "> Checking Security...",
-    "> Connecting Database...",
-    "> Searching User...",
-    "> Loading Driver...",
-    "",
-    "> Authorization Complete."
-
+const screens = [
+    bootScreen,
+    authorizedScreen,
+    equipmentScreen,
+    standingByScreen,
+    completeScreen,
+    birthdayScreen,
+    secretScreen
 ];
 
-let lineIndex = 0;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-let charIndex = 0;
+async function typeText(text, speed = 28) {
 
-let output = "";
+    typing = true;
+    nextButton.disabled = true;
 
-function typeLine(){
+    terminalText.textContent = "";
 
-    if(lineIndex >= bootLines.length){
+    for (const char of text) {
 
-        finishBoot();
+        terminalText.textContent += char;
 
+        terminalText.scrollTop = terminalText.scrollHeight;
+
+        await sleep(speed);
+
+    }
+
+    typing = false;
+    nextButton.disabled = false;
+
+}
+
+function setStatus(status, user, device) {
+
+    statusValue.textContent = status;
+    userValue.textContent = user;
+    deviceValue.textContent = device;
+
+}
+
+async function nextScreen() {
+
+    if (typing) return;
+
+    currentScreen++;
+
+    if (currentScreen >= screens.length) {
+
+        currentScreen = screens.length - 1;
         return;
 
     }
 
-    const line = bootLines[lineIndex];
-
-    if(charIndex < line.length){
-
-        output += line.charAt(charIndex);
-
-        terminal.textContent = output + "█";
-
-        charIndex++;
-
-        setTimeout(typeLine,35);
-
-    }else{
-
-        output += "\n";
-
-        terminal.textContent = output + "█";
-
-        lineIndex++;
-
-        charIndex = 0;
-
-        setTimeout(typeLine,220);
-
-    }
+    await screens[currentScreen]();
 
 }
-function finishBoot(){
 
-    terminal.textContent = output;
+nextButton.addEventListener("click", nextScreen);
 
-    statusText.textContent = "ONLINE";
+window.onload = async () => {
 
-    databaseText.textContent = "CONNECTED";
-
-    userText.textContent = "FOUND";
-
-    driverText.textContent = "READY";
-
-    nextButton.style.display = "block";
-
-}
-window.onload = () => {
-
-    setTimeout(typeLine,600);
+    await screens[0]();
 
 };
-// ==============================
-// Authorized User
-// ==============================
 
-nextButton.addEventListener("click", showAuthorizedUser);
+async function bootScreen() {
 
-function showAuthorizedUser(){
+    setStatus(
+        "INITIALIZING",
+        "----------",
+        "OFFLINE"
+    );
 
-    nextButton.style.display = "none";
+    await typeText(
 
-    statusText.textContent = "AUTHORIZED";
+`SMART BRAIN SECURITY SYSTEM
 
-    databaseText.textContent = "ACCESS GRANTED";
+Initializing...
 
-    userText.textContent = "SB-555-0930";
+Loading Core...
+Loading Memory...
+Loading Security...
+Loading Driver Database...
 
-    driverText.textContent = "FAIZ DRIVER";
+SYSTEM READY.
 
-    terminal.textContent = "";
+Press NEXT.`
 
-    output = "";
+    );
 
-    lineIndex = 0;
+}
 
-    charIndex = 0;
+async function authorizedScreen() {
 
-    const profile = [
+    setStatus(
+        "AUTHORIZED",
+        "SB-555-0930",
+        "CONNECTING"
+    );
 
-        "SMART BRAIN DATABASE",
+    await typeText(
+
+`SMART BRAIN SECURITY SYSTEM
+
+Authorization Complete
+
+Welcome
+
+USER NAME
+戴崧原
+
+JAPANESE NAME
+たい すうげん
+
+USER ID
+SB-555-0930
+
+SECURITY LEVEL
+A
+
+ACCESS GRANTED.
+
+Press NEXT.`
+
+    );
+
+}
+
+async function equipmentScreen() {
+
+    setStatus(
+        "SCANNING",
+        "SB-555-0930",
+        "FAIZ GEAR"
+    );
+
+    await typeText(
+
+`Equipment Scan
+
+Scanning Driver...
+
+[ OK ] Faiz Gear ver.2
+
+Scanning Weapon...
+
+[ OK ] Faiz Edge
+
+Scanning Axel Memory...
+
+[ OK ]
+
+SYSTEM RESULT
+
+2 Equipment Verified
+
+No Error Found.
+
+Press NEXT.`
+
+    );
+
+}
+
+async function standingByScreen() {
+
+    setStatus(
+        "READY",
+        "SB-555-0930",
+        "555 DRIVER"
+    );
+
+    nextButton.disabled = true;
+
+    terminalText.textContent = "";
+
+    const messages = [
+
+        "Loading Faiz Driver...",
         "",
-        "USER AUTHORIZED",
+        "Checking Mission...",
         "",
-        "NAME : 戴崧原",
-        "NAME(JP) : たい すうげん",
-        "USER ID : SB-555-0930",
+        "Mission Approved.",
         "",
-        "RANK : LEVEL A",
-        "BELT : FAIZ GEAR",
-        "STATUS : ACTIVE",
-        "",
-        "ACCESS PERMITTED."
+        "STANDING BY"
 
     ];
 
-    typeProfile(profile);
+    for (const msg of messages) {
 
-}
-function typeProfile(lines){
+        terminalText.textContent += msg + "\n";
 
-    let l = 0;
-
-    let c = 0;
-
-    let text = "";
-
-    function typing(){
-
-        if(l >= lines.length){
-
-            terminal.textContent = text;
-
-            nextButton.innerText = "NEXT";
-
-            nextButton.style.display = "block";
-
-            return;
-
-        }
-
-        if(c < lines[l].length){
-
-            text += lines[l][c];
-
-            terminal.textContent = text + "█";
-
-            c++;
-
-            setTimeout(typing,30);
-
-        }else{
-
-            text += "\n";
-
-            l++;
-
-            c = 0;
-
-            setTimeout(typing,180);
-
-        }
+        await sleep(700);
 
     }
 
-    typing();
-
-}
-// ==============================
-// Equipment Scan
-// ==============================
-
-nextButton.addEventListener("click", nextStep);
-
-let currentStep = 0;
-
-function nextStep(){
-
-    currentStep++;
-
-    if(currentStep === 1){
-
-        showEquipment();
-
-    }
+    nextButton.disabled = false;
 
 }
 
-function showEquipment(){
+async function completeScreen() {
 
-    nextButton.style.display = "none";
+    setStatus(
+        "COMPLETE",
+        "SB-555-0930",
+        "FAIZ READY"
+    );
 
-    statusText.textContent = "SCANNING";
+    nextButton.disabled = true;
 
-    databaseText.textContent = "EQUIPMENT";
+    terminalText.textContent = "";
 
-    driverText.textContent = "VERIFYING";
+    const messages = [
 
-    const equipment = [
-
-        "SMART BRAIN EQUIPMENT DATABASE",
+        "STANDING BY",
         "",
-        "Searching Equipment...",
+        "Complete.",
         "",
-        "✔ CSM FAIZ GEAR Ver.2",
+        "555 DRIVER ONLINE",
         "",
-        "✔ CSM FAIZ AXEL",
+        "SMART BRAIN LINK ESTABLISHED",
         "",
-        "✔ CSM FAIZ EDGE",
-        "",
-        "Driver Authentication Complete.",
-        "",
-        "Equipment Ready."
+        "MISSION READY"
 
     ];
 
-    typeEquipment(equipment);
+    for (const msg of messages) {
 
-}
+        terminalText.textContent += msg + "\n";
 
-function typeEquipment(lines){
-
-    let line = 0;
-
-    let char = 0;
-
-    let text = "";
-
-    function typing(){
-
-        if(line >= lines.length){
-
-            terminal.textContent = text;
-
-            statusText.textContent = "READY";
-
-            databaseText.textContent = "CONNECTED";
-
-            driverText.textContent = "ONLINE";
-
-            nextButton.innerText = "STANDING BY";
-
-            nextButton.style.display = "block";
-
-            return;
-
-        }
-
-        if(char < lines[line].length){
-
-            text += lines[line][char];
-
-            terminal.textContent = text + "█";
-
-            char++;
-
-            setTimeout(typing,28);
-
-        }else{
-
-            text += "\n";
-
-            line++;
-
-            char = 0;
-
-            setTimeout(typing,180);
-
-        }
+        await sleep(650);
 
     }
 
-    typing();
+    nextButton.disabled = false;
+
+}
+
+async function birthdayScreen() {
+
+    setStatus(
+        "MISSION",
+        "SB-555-0930",
+        "ONLINE"
+    );
+
+    await typeText(
+
+`Mission File Opened
+
+Target
+
+戴崧原
+
+Mission Date
+
+Happy Birthday
+
+Congratulations.
+
+You have successfully completed another year.
+
+May every dream come true.
+
+May every challenge become your strength.
+
+Thank you for always being by my side.
+
+Today...
+
+This system belongs only to you.
+
+Happy Birthday ❤️
+
+Press NEXT.`
+
+    );
+
+}
+
+async function secretScreen() {
+
+    setStatus(
+        "SECRET FILE",
+        "SB-555-0930",
+        "CLASSIFIED"
+    );
+
+    nextButton.disabled = true;
+
+    await typeText(
+
+`========================================
+
+SMART BRAIN
+CONFIDENTIAL FILE
+
+========================================
+
+ACCESS LEVEL : A
+
+OPENING SECRET FILE...
+
+...
+
+...
+
+Hello 崧原 ❤️
+
+其實今天不是什麼任務。
+
+也沒有任何需要打倒的敵人。
+
+今天唯一的任務，就是希望你開開心心。
+
+謝謝你一直陪著我。
+
+謝謝你包容我的任性。
+
+謝謝你努力工作。
+
+謝謝你讓我每天都覺得很幸福。
+
+希望以後每一年，
+
+我都還能陪你一起過生日。
+
+最後...
+
+生日快樂 ❤️
+
+FROM
+
+雅筑
+
+========================================
+
+MISSION COMPLETE
+
+THANK YOU FOR PLAYING
+
+SMART BRAIN SYSTEM
+
+END OF FILE`
+
+    );
+
+    nextButton.textContent = "RESTART";
+
+    nextButton.disabled = false;
+
+    nextButton.onclick = async () => {
+
+        currentScreen = 0;
+
+        nextButton.textContent = "NEXT";
+
+        nextButton.onclick = nextScreen;
+
+        await screens[0]();
+
+    };
 
 }
