@@ -1,1 +1,532 @@
+/* ===========================
+   RESET
+=========================== */
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    background:#020202;
+
+    overflow:hidden;
+
+    font-family:
+    "SF Mono",
+    "Consolas",
+    monospace;
+
+    color:#00ff99;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+}
+
+
+/* ===========================
+   BACKGROUND
+=========================== */
+
+.background-glow{
+
+    position:fixed;
+
+    width:700px;
+    height:700px;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        rgba(255,120,0,.18),
+        transparent 70%
+    );
+
+    filter:blur(60px);
+
+    pointer-events:none;
+
+}
+
+
+/* ===========================
+   SCANLINE
+=========================== */
+
+.scanline{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    repeating-linear-gradient(
+
+        to bottom,
+
+        rgba(255,255,255,.03) 0px,
+
+        rgba(255,255,255,.03) 1px,
+
+        transparent 2px,
+
+        transparent 4px
+
+    );
+
+    animation:scanMove 8s linear infinite;
+
+    opacity:.35;
+
+}
+
+@keyframes scanMove{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(6px);
+
+    }
+
+}
+
+
+/* ===========================
+   TERMINAL
+=========================== */
+
+.terminal{
+
+    width:min(92vw,430px);
+
+    height:88vh;
+
+    border:2px solid #ff7b00;
+
+    border-radius:16px;
+
+    background:#050505;
+
+    box-shadow:
+
+        0 0 12px rgba(255,120,0,.5),
+
+        inset 0 0 18px rgba(255,120,0,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+.terminal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 20px;
+
+    background:#111;
+
+    border-bottom:1px solid #ff7b00;
+
+}
+
+.header-left{
+
+    color:#ff8a00;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    font-size:14px;
+
+}
+
+.header-right{
+
+    color:#ffaa33;
+
+    font-size:12px;
+
+}
+/* ===========================
+   STATUS PANEL
+=========================== */
+
+.status-panel{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:10px;
+
+    padding:18px;
+
+}
+
+.status-card{
+
+    border:1px solid rgba(255,123,0,.45);
+
+    border-radius:10px;
+
+    background:#0b0b0b;
+
+    padding:12px 8px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:68px;
+
+}
+
+.status-title{
+
+    color:#ff8a00;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+
+}
+
+.status-value{
+
+    color:#00ff99;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    text-shadow:0 0 8px rgba(0,255,153,.55);
+
+}
+
+
+/* ===========================
+   DIVIDER
+=========================== */
+
+.divider{
+
+    width:100%;
+
+    height:1px;
+
+    background:rgba(255,123,0,.35);
+
+}
+
+
+/* ===========================
+   SCREEN
+=========================== */
+
+.screen{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:24px 20px;
+
+    position:relative;
+
+}
+
+.screen::-webkit-scrollbar{
+
+    width:4px;
+
+}
+
+.screen::-webkit-scrollbar-thumb{
+
+    background:#ff7b00;
+
+}
+
+
+/* ===========================
+   TERMINAL TEXT
+=========================== */
+
+#terminalText{
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+    color:#00ff99;
+
+    font-size:15px;
+
+    line-height:1.75;
+
+    letter-spacing:.8px;
+
+    text-shadow:0 0 8px rgba(0,255,153,.45);
+
+}
+
+
+/* ===========================
+   CURSOR
+=========================== */
+
+.cursor{
+
+    display:inline-block;
+
+    width:10px;
+
+    animation:blink .9s infinite;
+
+}
+
+@keyframes blink{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:0;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}
+/* ===========================
+   BUTTON
+=========================== */
+
+#nextButton{
+
+    margin:18px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ff7b00;
+
+    color:#111;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+        0 0 18px rgba(255,123,0,.45);
+
+}
+
+#nextButton:hover{
+
+    background:#ff9b22;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 0 28px rgba(255,140,0,.7);
+
+}
+
+#nextButton:active{
+
+    transform:scale(.98);
+
+}
+
+#nextButton:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+/* ===========================
+   EFFECTS
+=========================== */
+
+.glow-orange{
+
+    color:#ff9a00;
+
+    text-shadow:
+        0 0 8px rgba(255,140,0,.8),
+        0 0 16px rgba(255,140,0,.4);
+
+}
+
+.glow-green{
+
+    color:#00ff99;
+
+    text-shadow:
+        0 0 8px rgba(0,255,153,.8),
+        0 0 18px rgba(0,255,153,.45);
+
+}
+
+.warning{
+
+    color:#ff4444;
+
+    text-shadow:
+        0 0 8px rgba(255,60,60,.8);
+
+}
+
+
+/* ===========================
+   FADE
+=========================== */
+
+.fade-in{
+
+    animation:fadeIn .45s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:480px){
+
+    .terminal{
+
+        width:94vw;
+
+        height:92vh;
+
+    }
+
+    .status-panel{
+
+        gap:8px;
+
+        padding:14px;
+
+    }
+
+    .status-title{
+
+        font-size:9px;
+
+    }
+
+    .status-value{
+
+        font-size:11px;
+
+    }
+
+    #terminalText{
+
+        font-size:14px;
+
+        line-height:1.65;
+
+    }
+
+    #nextButton{
+
+        margin:14px;
+
+        height:50px;
+
+    }
+
+}
