@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SMART BRAIN SECURITY TERMINAL</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- 掃描線 -->
+    <div class="scanline"></div>
+
+    <!-- 背景光 -->
+    <div class="background-glow"></div>
+
+    <!-- 主終端 -->
+    <main class="terminal">
+
+        <!-- Header -->
+
+        <header class="terminal-header">
+
+            <div>
+
+                <h1>SMART BRAIN</h1>
+
+                <p>SECURITY TERMINAL</p>
+
+            </div>
+
+            <div class="status-light"></div>
+
+        </header>
+
+        <!-- 狀態資訊 -->
+
+        <section class="status-panel">
+
+            <div>
+                <span>STATUS</span>
+                <strong id="statusText">BOOTING...</strong>
+            </div>
+
+            <div>
+                <span>DATABASE</span>
+                <strong id="databaseText">CONNECTING</strong>
+            </div>
+
+            <div>
+                <span>USER</span>
+                <strong id="userText">UNKNOWN</strong>
+            </div>
+
+            <div>
+                <span>DRIVER</span>
+                <strong id="driverText">OFFLINE</strong>
+            </div>
+
+        </section>
+
+        <!-- 分隔線 -->
+
+        <div class="divider"></div>
+
+        <!-- 終端機 -->
+
+        <section class="screen">
+
+            <pre id="terminalText"></pre>
+
+            <button id="nextButton">
+
+                ACCESS FILE
+
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
